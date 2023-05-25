@@ -1,34 +1,68 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# PokeNext 
 
-## Getting Started
+## Description
+Mon site Pokedex est construit en utilisant Next.js, ainsi que l'API PokeAPI pour récupérer les données sur les Pokémons. 
+Le site offre une interface utilisateur conviviale et facile à utiliser, avec des fonctionnalités telles que la 
+recherche de Pokémons, la navigation par type et la visualisation des caractéristiques et des capacités de chaque Pokémon.  
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Installation
+1. Clonez le repo
+   ```sh
+   git clone
+    ```
+2. Installez les packages NPM
+3. Lancez le serveur
+   ```sh
+   npm run dev
+   ```
+4. Ouvrez votre navigateur et allez sur http://localhost:3000
+5. Enjoy !
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+-  Pour voir le site en ligne, cliquez sur le lien suivant : https://poke-next-topaz.vercel.app/
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### ROADMAP
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## First steps
+- [ ] Afficher la liste des Pokémons
+- [ ] Afficher les détails d'un Pokémon
+- [ ] Afficher les types de Pokémons
+- [ ] Afficher les caractéristiques d'un Pokémon
+- [ ] Afficher les capacités d'un Pokémon
+- [ ] Afficher les évolutions d'un Pokémon
+- [ ] Afficher les Pokémons par type
+- [ ] Afficher les Pokémons par génération
+- [ ] Afficher les Pokémons par région
+- [ ] Background du Pokemon selon le type && Degrader si multi type || Moyen de couleur du pokemon
 
-## Deploy on Vercel
+## Second steps
+- [ ] Afficher les Pokémons par génération
+- [ ] Afficher les faiblesses et les résistances de chaque Pokémon en fonction de son type
+- [ ] Ajouter la possibilité de comparer les statistiques de deux Pokémon différents
+- [ ] Ajouter la possibilité de créer et de personnaliser une équipe de Pokémon
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+### API utilisée :
+https://pokeapi.co/
+
+
+### Technologies utilisées :
+- Next.js
+- React.js
+- Tailwind CSS
+- Axios
+- Framer Motion
+- Vercel
+
+
+## Contact
+-  GitHub : [@your-username]
+- Email : [your-email]
+
+
