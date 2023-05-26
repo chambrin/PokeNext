@@ -1,8 +1,9 @@
 'use client';
 
-
 import React, { useEffect, useState } from 'react';
 import { fetchPokemonList } from '../../services/Pokemon_PokeAPI';
+
+// import
 
 export default function Pokemon() {
     const [pokemonList, setPokemonList] = useState<any[]>([]);
@@ -12,21 +13,24 @@ export default function Pokemon() {
             const data = await fetchPokemonList();
             setPokemonList(data);
         }
-        fetchData();
+        fetchData().then(r => console.log(r));
     }, []);
 
     return (
-        <main className="bg-gray-500 h-screen overflow-y-scroll pb-16 scrollbar-hidden">
+        <main className="h-screen overflow-y-scroll  lg:p-22 sm:p-8 scrollbar-hidden">
             <div>
                 {pokemonList.map(pokemon => (
-                    <div key={pokemon.name}>
-                        <img src={pokemon.image} alt={pokemon.name} />
-                        <p>{pokemon.name}</p>
-                        <ul>
-                            {pokemon.types.map((type: string) => (
-                                <li key={type}>{type}</li>
-                            ))}
-                        </ul>
+                    <div key={pokemon.name} className="PokeCard p-16 bg-orange-200  rounded-2xl h-48 mb-44 flex flex-row items-center justify-between bg-center bg-no-repeat" style={{ backgroundImage: `url('/Pokeball.svg')` }}>
+                        <div className="flex flex-col">
+                            <p>#903</p>
+                            <p>{pokemon.name}</p>
+                                <div>
+                                    {pokemon.types.map((type: string) => (
+                                        <p key={type}>{type}</p>
+                                    ))}
+                                </div>
+                        </div>
+                        <img className="overflow-visible right-0 -mr-20  w-3/6" src={pokemon.image} alt={pokemon.name} />
                     </div>
                 ))}
             </div>
