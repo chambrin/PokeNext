@@ -1,4 +1,6 @@
 'use client';
+
+
 import React, { useEffect, useState } from 'react';
 import { fetchPokemonList } from '../../services/Pokemon_PokeAPI';
 
@@ -14,7 +16,7 @@ export default function Pokemon() {
     }, []);
 
     return (
-        <main>
+        <main className="bg-gray-500 h-screen overflow-y-scroll pb-16 scrollbar-hidden">
             <div>
                 {pokemonList.map(pokemon => (
                     <div key={pokemon.name}>

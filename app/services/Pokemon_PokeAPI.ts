@@ -9,7 +9,9 @@ export async function fetchPokemonList() {
             const pokemonResponse = await axios.get(pokemon.url);
             return {
                 ...pokemon,
+                // récupère l'illustration officielle du Pokemon
                 image: pokemonResponse.data.sprites.other['official-artwork'].front_default,
+                // récupère les types de Pokemon
                 types: pokemonResponse.data.types.map((type: any) => type.type.name),
             };
         })
