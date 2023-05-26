@@ -1,7 +1,13 @@
-import axios from 'axios';
+import axios from "axios";
 
-// récupère la liste des 20 premiers Pokemons avec leurs illustrations artwork et leurs types
 export async function fetchPokemonList() {
+    const cachedPokemon = localStorage.getItem('pokemonData');
+    if (cachedPokemon) {
+        // si des données sont stockées localement, renvoie les données
+        return JSON.parse(cachedPokemon);
+    }
+    // si aucune donnée n'est stockée localement, récupère les données depuis l'API
+    // recuperation des 20 premiers pokemons
     const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=20');
     const pokemonList = response.data.results;
     const pokemonData = await Promise.all(
@@ -9,12 +15,14 @@ export async function fetchPokemonList() {
             const pokemonResponse = await axios.get(pokemon.url);
             return {
                 ...pokemon,
-                // récupère l'illustration officielle du Pokemon
+                // récupère l'image officielle du pokemon
                 image: pokemonResponse.data.sprites.other['official-artwork'].front_default,
-                // récupère les types de Pokemon
+                // récupère les types du pokemon
                 types: pokemonResponse.data.types.map((type: any) => type.type.name),
             };
         })
     );
+    // stocke les données localement
+    localStorage.setItem('pokemonData', JSON.stringify(pokemonData));
     return pokemonData;
 }
