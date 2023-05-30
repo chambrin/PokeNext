@@ -1,6 +1,7 @@
 
 import axios from "axios";
 
+// Function de request Pokedex
 export async function fetchPokemonList(url = 'https://pokeapi.co/api/v2/pokemon?offset=0&limit=20'): Promise<{ results: any[], next: string | null }> {
     const response = await fetch(url);
     const data = await response.json();
@@ -14,6 +15,7 @@ export async function fetchPokemonList(url = 'https://pokeapi.co/api/v2/pokemon?
             image: pokemonData.sprites.other['official-artwork'].front_default,
         };
     }));
+    // data des pokemon (results) + url des pokemon suivant (next)
     return {
         results,
         next: data.next

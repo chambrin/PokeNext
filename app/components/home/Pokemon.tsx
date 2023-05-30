@@ -1,13 +1,17 @@
 'use client';
 // import
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { fetchPokemonList } from '../../services/Pokemon_PokeAPI';
-import Image from "next/image";
+import Image from 'next/image';
 
 export default function Pokemon() {
+    // pokemon list
     const [pokemonList, setPokemonList] = useState<any[]>([]);
+    //lien des 20 prochains pokemon
     const [nextUrl, setNextUrl] = useState<string>('');
-
+    // selectionne le main
+    const mainRef = useRef<HTMLDivElement>(null);
+    // fetch les 20 premiers pokemon
     useEffect(() => {
         async function fetchFirstPokemon() {
             const data = await fetchPokemonList();
@@ -17,14 +21,45 @@ export default function Pokemon() {
         fetchFirstPokemon().then(() => console.log('20 premiers Pokemon récupérés'));
     }, []);
 
+    // fetch les 20 pokemon suivants
     async function fetchNextPokemon() {
         const data = await fetchPokemonList(nextUrl);
         setPokemonList(prevState => [...prevState, ...data.results]);
         setNextUrl(data.next || '');
     }
+    // scroll infini pour fetch les 20 pokemon suivants
+    useEffect(() => {
+        function handleScroll() {
+            // si le main est selectionné
+            if (mainRef.current) {
+                // récupère la position du scroll et la hauteur du main
+                const { scrollTop, clientHeight, scrollHeight } = mainRef.current;
+                // si le scroll est en bas du main
+                if (scrollTop + clientHeight === scrollHeight) {
+                    // fetch les 20 pokemon suivants et affiche un message dans la console
+                    fetchNextPokemon().then(r => console.log('20 Pokemon suivants récupérés'));
+                }
+            }
+        }
+
+        // déclencheur la fonction handleScroll
+        if (mainRef.current) {
+            // ajoute un event listener sur le main
+            mainRef.current.addEventListener('scroll', handleScroll);
+        }
+
+        // supprime l'event listener
+        return () => {
+            if (mainRef.current) {
+                mainRef.current.removeEventListener('scroll', handleScroll);
+            }
+        };
+    }, [fetchNextPokemon, mainRef]);
+
+
 
     return (
-        <main className="h-screen overflow-y-scroll lg:p-22 sm:p-8 scrollbar-hidden">
+        <main ref={mainRef} className="h-screen overflow-y-scroll lg:p-22 sm:p-8 scrollbar-hidden">
             <div>
                 {pokemonList.map((pokemon, index) => (
                     <div
@@ -41,15 +76,10 @@ export default function Pokemon() {
                                 ))}
                             </div>
                         </div>
-                        <Image width={300} height={300} className="overflow-visible right-0 -mr-20 w-3/6" src={pokemon.image} alt={pokemon.name} />
+                        <Image width={500} height={500} className="overflow-visible right-0 -mr-20 w-3/6" src={pokemon.image} alt={pokemon.name} />
                     </div>
                 ))}
             </div>
-            {nextUrl && (
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={fetchNextPokemon}>
-                    Afficher les 20 prochains Pokemon
-                </button>
-            )}
         </main>
     );
 }
