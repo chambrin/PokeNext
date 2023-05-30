@@ -62,7 +62,6 @@ https://pokeapi.co/
 
 
 ## Contact
--  GitHub : [@your-username]
-- Email : [your-email]
+- Email : contact@chambrin.dev
 
 
