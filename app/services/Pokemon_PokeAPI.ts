@@ -19,6 +19,7 @@ export async function fetchPokemonList() {
                 image: pokemonResponse.data.sprites.other['official-artwork'].front_default,
                 // récupère les types du pokemon
                 types: pokemonResponse.data.types.map((type: any) => type.type.name),
+
             };
         })
     );
