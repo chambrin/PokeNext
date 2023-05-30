@@ -2,6 +2,7 @@
 // import
 import React, { useEffect, useState } from 'react';
 import { fetchPokemonList } from '../../services/Pokemon_PokeAPI';
+import Image from "next/image";
 
 export default function Pokemon() {
     const [pokemonList, setPokemonList] = useState<any[]>([]);
@@ -11,7 +12,7 @@ export default function Pokemon() {
         async function fetchFirstPokemon() {
             const data = await fetchPokemonList();
             setPokemonList(data.results);
-            setNextUrl(data.next);
+            setNextUrl(data.next || '');
         }
         fetchFirstPokemon().then(() => console.log('20 premiers Pokemon récupérés'));
     }, []);
@@ -19,7 +20,7 @@ export default function Pokemon() {
     async function fetchNextPokemon() {
         const data = await fetchPokemonList(nextUrl);
         setPokemonList(prevState => [...prevState, ...data.results]);
-        setNextUrl(data.next);
+        setNextUrl(data.next || '');
     }
 
     return (
@@ -40,7 +41,7 @@ export default function Pokemon() {
                                 ))}
                             </div>
                         </div>
-                        <img className="overflow-visible right-0 -mr-20 w-3/6" src={pokemon.image} alt={pokemon.name} />
+                        <Image width={300} height={300} className="overflow-visible right-0 -mr-20 w-3/6" src={pokemon.image} alt={pokemon.name} />
                     </div>
                 ))}
             </div>
