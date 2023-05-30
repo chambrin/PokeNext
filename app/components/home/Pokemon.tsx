@@ -3,21 +3,24 @@
 import React, { useEffect, useState } from 'react';
 import { fetchPokemonList } from '../../services/Pokemon_PokeAPI';
 
-
 export default function Pokemon() {
     const [pokemonList, setPokemonList] = useState<any[]>([]);
-
-
+    const [nextUrl, setNextUrl] = useState<string>('');
 
     useEffect(() => {
-        async function fetchData() {
+        async function fetchFirstPokemon() {
             const data = await fetchPokemonList();
-            setPokemonList(data);
+            setPokemonList(data.results);
+            setNextUrl(data.next);
         }
-
-        fetchData().then(r => console.log(r));
+        fetchFirstPokemon().then(() => console.log('20 premiers Pokemon récupérés'));
     }, []);
 
+    async function fetchNextPokemon() {
+        const data = await fetchPokemonList(nextUrl);
+        setPokemonList(prevState => [...prevState, ...data.results]);
+        setNextUrl(data.next);
+    }
 
     return (
         <main className="h-screen overflow-y-scroll lg:p-22 sm:p-8 scrollbar-hidden">
@@ -29,8 +32,7 @@ export default function Pokemon() {
                         style={{ backgroundImage: `url('/Pokeball.svg')` }}
                     >
                         <div className="flex flex-col">
-                            <p className="font-custom">{pokemon.id}</p>
-                            <p>#{index + 1}</p>
+                            <p className="font-custom">#{pokemon.id}</p>
                             <p className="font-custom">{pokemon.name}</p>
                             <div>
                                 {pokemon.types.map((type: string) => (
@@ -42,6 +44,11 @@ export default function Pokemon() {
                     </div>
                 ))}
             </div>
+            {nextUrl && (
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={fetchNextPokemon}>
+                    Afficher les 20 prochains Pokemon
+                </button>
+            )}
         </main>
     );
 }
