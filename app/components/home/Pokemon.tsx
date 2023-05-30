@@ -1,20 +1,23 @@
 'use client';
-
+// import
 import React, { useEffect, useState } from 'react';
 import { fetchPokemonList } from '../../services/Pokemon_PokeAPI';
 
-// import
 
 export default function Pokemon() {
     const [pokemonList, setPokemonList] = useState<any[]>([]);
+
+
 
     useEffect(() => {
         async function fetchData() {
             const data = await fetchPokemonList();
             setPokemonList(data);
         }
+
         fetchData().then(r => console.log(r));
     }, []);
+
 
     return (
         <main className="h-screen overflow-y-scroll lg:p-22 sm:p-8 scrollbar-hidden">
@@ -26,6 +29,7 @@ export default function Pokemon() {
                         style={{ backgroundImage: `url('/Pokeball.svg')` }}
                     >
                         <div className="flex flex-col">
+                            <p className="font-custom">{pokemon.id}</p>
                             <p>#{index + 1}</p>
                             <p className="font-custom">{pokemon.name}</p>
                             <div>
