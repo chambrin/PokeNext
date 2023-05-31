@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-export default function Filter({ onSelectType }) {
+export default function Filter({ onSelectType, handleResetFilter }) {
         const [types, setTypes] = useState([]);
 
         useEffect(() => {
@@ -15,6 +15,7 @@ export default function Filter({ onSelectType }) {
         return (
             <aside className="h-screen flex flex-col  items-center">
                     <h2>Filter</h2>
+                    <button onClick={handleResetFilter}>Reset</button>
                     {types.map((type) => (
                         <h3 className="
                          " key={type.name} onClick={() => onSelectType(type.url)}>

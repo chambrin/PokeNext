@@ -56,7 +56,6 @@ export default function Pokemon({ filteredPokemonList }: { filteredPokemonList: 
 
 
 
-
     return (
         <main ref={mainRef} className="h-screen overflow-y-scroll lg:p-22 sm:p-8 scrollbar-hidden">
             <div>
