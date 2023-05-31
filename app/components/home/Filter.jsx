@@ -9,14 +9,15 @@ export default function Filter({ onSelectType }) {
                         const data = await response.json();
                         setTypes(data.results);
                 }
-                fetchTypes();
+                fetchTypes().then(r => console.log('fetch types'));
         }, []);
 
         return (
-            <aside className="bg-amber-200 h-screen flex flex-col justify-center items-center">
+            <aside className="h-screen flex flex-col  items-center">
                     <h2>Filter</h2>
                     {types.map((type) => (
-                        <h3 key={type.name} onClick={() => onSelectType(type.url)}>
+                        <h3 className="
+                         " key={type.name} onClick={() => onSelectType(type.url)}>
                                 {type.name}
                         </h3>
                     ))}
