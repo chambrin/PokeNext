@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { fetchPokemonList, getPokemonByType } from '../../services/Pokemon_PokeAPI';
 import Image from 'next/image';
 
-export default function Pokemon() {
+export default function Pokemon({ filteredPokemonList }: { filteredPokemonList: any[]}) {
     // pokemon list
     const [pokemonList, setPokemonList] = useState<any[]>([]);
     // next url
@@ -54,23 +54,13 @@ export default function Pokemon() {
         };
     }, [fetchNextPokemon, mainRef]);
 
-    // useEffect pour récupérer les pokemon filtrés
-    useEffect(() => {
-       async function fetchFilteredPokemon() {
-            const pokemonFilterListFromStorage = localStorage.getItem('pokemonFilterList');
-            if (pokemonFilterListFromStorage) {
-                setPokemonList(JSON.parse(pokemonFilterListFromStorage));
-            }
-        }
-        fetchFilteredPokemon().then(r =>    console.log('Pokemon filtrés récupérés'));
-    }, []); // Ajouter une dépendance vide pour éviter les appels inutiles
 
 
 
     return (
         <main ref={mainRef} className="h-screen overflow-y-scroll lg:p-22 sm:p-8 scrollbar-hidden">
             <div>
-                {pokemonList.map((pokemon, index) => (
+                {(filteredPokemonList.length > 0 ? filteredPokemonList : pokemonList).map((pokemon, index) => (
                     <div
                         key={pokemon.name}
                         className="PokeCard p-16 bg-orange-200 rounded-2xl h-48 mb-44 flex flex-row items-center justify-between bg-center bg-no-repeat"
@@ -91,4 +81,5 @@ export default function Pokemon() {
             </div>
         </main>
     );
+
 }

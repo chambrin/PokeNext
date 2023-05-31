@@ -15,7 +15,7 @@ export async function getPokemonByType(type: string) {
         };
     });
     localStorage.setItem('pokemonFilterList', JSON.stringify(pokemonFilterList)); // sauvegarde des données dans le local storage
-    console.log(pokemonFilterList);
+    return pokemonFilterList;
 }
 
 
