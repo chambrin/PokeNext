@@ -35,6 +35,7 @@ export default function Home() {
     function handleResetFilter(): void {
         setFilteredPokemonList([]);
         localStorage.removeItem('pokemonFilterList');
+        localStorage.removeItem('pokemonList');
     }
 
     return (

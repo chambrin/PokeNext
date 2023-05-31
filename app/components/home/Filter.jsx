@@ -14,8 +14,8 @@ export default function Filter({ onSelectType, handleResetFilter }) {
 
         return (
             <aside className="h-screen flex flex-col  items-center">
-                    <h2>Filter</h2>
                     <button onClick={handleResetFilter}>Reset</button>
+                    <h2>Filter</h2>
                     {types.map((type) => (
                         <h3 className="
                          " key={type.name} onClick={() => onSelectType(type.url)}>
