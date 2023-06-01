@@ -23,7 +23,7 @@ export default function Home() {
         fetchFilteredPokemon().then(r => console.log('Pokemon filtrés récupérés'));
     }, []);
 
-    // function de cliaue sur un element du filtre du composant Filter
+    // function de clique sur un element du filtre du composant Filter
     async function handleSelectType(type: string): Promise<void> {
         setSelectedType(type);
         const pokemonFilterList = await getPokemonByType(type);
@@ -31,11 +31,18 @@ export default function Home() {
         localStorage.setItem('pokemonFilterList', JSON.stringify(pokemonFilterList));
     }
 
+    // function qui vas vidé pokemonFilterList
+    function handleResetFilter(): void {
+        setFilteredPokemonList([]);
+        localStorage.removeItem('pokemonFilterList');
+        localStorage.removeItem('pokemonList');
+    }
+
     return (
         <>
             <div className="Home grid grid-cols-4">
                 <div className="col-span-1">
-                    <Filter onSelectType={handleSelectType} />
+                    <Filter handleResetFilter={handleResetFilter} onSelectType={handleSelectType} />
                 </div>
                 <div className="col-span-2">
                     <Pokemon filteredPokemonList={filteredPokemonList} />

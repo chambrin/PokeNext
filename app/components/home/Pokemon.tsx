@@ -3,8 +3,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { fetchPokemonList, getPokemonByType } from '../../services/Pokemon_PokeAPI';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
+
 
 export default function Pokemon({ filteredPokemonList }: { filteredPokemonList: any[]}) {
+
     // pokemon list
     const [pokemonList, setPokemonList] = useState<any[]>([]);
     // next url
@@ -58,7 +61,7 @@ export default function Pokemon({ filteredPokemonList }: { filteredPokemonList: 
 
 
     return (
-        <main ref={mainRef} className="h-screen overflow-y-scroll lg:p-22 sm:p-8 scrollbar-hidden">
+        <main ref={mainRef} className="pokedexMain h-screen overflow-y-scroll lg:p-22 sm:p-8 scrollbar-hidden">
             <div>
                 {(filteredPokemonList.length > 0 ? filteredPokemonList : pokemonList).map((pokemon, index) => (
                     <div
