@@ -7,6 +7,9 @@ import '../styles/gobals.css';
 import { useEffect, useState } from "react";
 import { getPokemonByType } from "@/app/services/Pokemon_PokeAPI";
 
+import { useRouter } from 'next/navigation';
+
+
 export default function Home() {
     const [selectedType, setSelectedType] = useState<string>('');
     const [filteredPokemonList, setFilteredPokemonList] = useState<any[]>([]);
@@ -38,6 +41,17 @@ export default function Home() {
         localStorage.removeItem('pokemonList');
     }
 
+    const router = useRouter();
+
+    //function de clique pour ouvrir une page du pokemon selectionner
+    function SelectPokemon(pokemon: any): void {
+        const pokemonId = pokemon.id;
+        router.push(`/${pokemonId}`);
+    }
+
+
+
+
     return (
         <>
             <div className="Home grid grid-cols-4">
@@ -45,7 +59,10 @@ export default function Home() {
                     <Filter handleResetFilter={handleResetFilter} onSelectType={handleSelectType} />
                 </div>
                 <div className="col-span-2">
-                    <Pokemon filteredPokemonList={filteredPokemonList} />
+                    <Pokemon
+                        SelectPokemon={SelectPokemon}
+                        filteredPokemonList={filteredPokemonList}
+                    />
                 </div>
                 <div className="col-span-1">
                     <Information />
