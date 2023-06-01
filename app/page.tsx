@@ -41,12 +41,16 @@ export default function Home() {
         localStorage.removeItem('pokemonList');
     }
 
+
+    
     const router = useRouter();
 
     //function de clique pour ouvrir une page du pokemon selectionner
     function SelectPokemon(pokemon: any): void {
-        const pokemonId = pokemon.id;
-        router.push(`/${pokemonId}`);
+        const pokemonId = pokemon.id
+        console.log(pokemonId);
+        const pokemonName = pokemon.name
+        router.push(`/${pokemonName}`);
     }
 
 
