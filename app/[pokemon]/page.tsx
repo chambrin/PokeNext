@@ -1,5 +1,5 @@
-
-export default function PagePokemon({ params }: { params: { pokeName: string } }) {
+'use client';
+export default  function PagePokemon() {
     return (
 
         <h1>Page du pokemon : </h1>
