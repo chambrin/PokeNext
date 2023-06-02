@@ -3,10 +3,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { fetchPokemonList, getPokemonByType } from '../../services/Pokemon_PokeAPI';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
 
 
-export default function Pokemon({ filteredPokemonList }: { filteredPokemonList: any[]}) {
+export default function Pokemon({ filteredPokemonList, SelectPokemon }: {
+    filteredPokemonList: any[],
+    SelectPokemon: (pokemon: any) => void
+}) {
 
     // pokemon list
     const [pokemonList, setPokemonList] = useState<any[]>([]);
@@ -65,6 +67,7 @@ export default function Pokemon({ filteredPokemonList }: { filteredPokemonList: 
             <div>
                 {(filteredPokemonList.length > 0 ? filteredPokemonList : pokemonList).map((pokemon, index) => (
                     <div
+                        onClick={() => SelectPokemon(pokemon)}
                         key={pokemon.name}
                         className="PokeCard p-16 bg-orange-200 rounded-2xl h-48 mb-44 flex flex-row items-center justify-between bg-center bg-no-repeat"
                         style={{ backgroundImage: `url('/Pokeball.svg')` }}

@@ -4,10 +4,14 @@ import Pokemon from "@/app/components/home/Pokemon";
 import Filter from "@/app/components/home/Filter";
 import Information from "@/app/components/home/Information";
 import '../styles/gobals.css';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { getPokemonByType } from "@/app/services/Pokemon_PokeAPI";
 
-export default function Home() {
+import { useRouter } from 'next/navigation';
+
+
+
+export default  function Home() {
     const [selectedType, setSelectedType] = useState<string>('');
     const [filteredPokemonList, setFilteredPokemonList] = useState<any[]>([]);
 
@@ -38,20 +42,41 @@ export default function Home() {
         localStorage.removeItem('pokemonList');
     }
 
+
+// route vers la page du pokemon
+    const router = useRouter();
+    function SelectPokemon(pokemon: any): void {
+        const pokemonId = pokemon.id;
+        const pokemonName = pokemon.name;
+        navigateToPokemonPage(pokemonId, pokemonName);
+    }
+
+    function navigateToPokemonPage(pokemonId: number, pokemonName: string): void {
+        router.push(`/${pokemonName}`);
+    }
+
+
+
     return (
         <>
+
             <div className="Home grid grid-cols-4">
                 <div className="col-span-1">
                     <Filter handleResetFilter={handleResetFilter} onSelectType={handleSelectType} />
                 </div>
                 <div className="col-span-2">
-                    <Pokemon filteredPokemonList={filteredPokemonList} />
+                    <Pokemon
+                        SelectPokemon={SelectPokemon}
+                        filteredPokemonList={filteredPokemonList}
+                    />
                 </div>
                 <div className="col-span-1">
                     <Information />
                 </div>
             </div>
         </>
+
     )
+
 }
 
