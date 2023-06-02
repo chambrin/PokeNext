@@ -3,7 +3,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { fetchPokemonList, getPokemonByType } from '../../services/Pokemon_PokeAPI';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
 
 
 export default function Pokemon({ filteredPokemonList, SelectPokemon }: {
