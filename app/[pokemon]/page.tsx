@@ -1,16 +1,23 @@
 'use client';
 
-//import de route
-import {useRouter, useSearchParams} from 'next/navigation';
+import {usePathname, useRouter, useSearchParams} from 'next/navigation';
 
-export default async function PagePokemon({ params }: { params: { slug: string }}) {
-    console.log(params);
+
+
+export default function PokemonPage() {
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    const pathname = usePathname();
+    
+
+    //requete pour récupérer les infos du pokemon
+  const url = `https://pokeapi.co/api/v2/pokemon${pathname}`;
 
 
     return (
-
-        <h1>Page du pokemon :  {params.slug}  </h1>
-
-)
-
+        <div>
+            <h1>Page du Pokémon : {pathname}</h1>
+            {/* Ajoutez ici le reste de votre code pour afficher les détails du Pokémon */}
+        </div>
+    );
 }
