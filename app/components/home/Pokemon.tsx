@@ -60,7 +60,36 @@ export default function Pokemon({ filteredPokemonList, SelectPokemon }: {
     }, [fetchNextPokemon, mainRef]);
 
 
+    // Icons des types
+    // Icons des types
+    const typesIcons = {
+        bug: '/types-icons/bug.svg',
+        dark: '/types-icons/dark.svg',
+        dragon: '/types-icons/dragon.svg',
+        electric: '/types-icons/electric.svg',
+        fairy: '/types-icons/fairy.svg',
+        fighting: '/types-icons/fighting.svg',
+        fire: '/types-icons/fire.svg',
+        flying: '/types-icons/flying.svg',
+        ghost: '/types-icons/ghost.svg',
+        grass: '/types-icons/grass.svg',
+        ground: '/types-icons/ground.svg',
+        ice: '/types-icons/ice.svg',
+        normal: '/types-icons/normal.svg',
+        poison: '/types-icons/poison.svg',
+        psychic: '/types-icons/psychic.svg',
+        rock: '/types-icons/rock.svg',
+        steel: '/types-icons/steel.svg',
+        water: '/types-icons/water.svg',
+    };
 
+    function getTypeIcon(type: string) {
+        const icon = typesIcons[type.toLowerCase()];
+        if (icon) {
+            return <img src={icon} alt={`${type} type icon`} width={24} height={24} />;
+        }
+        return null;
+    }
 
     return (
         <main ref={mainRef} className="pokedexMain h-screen overflow-y-scroll lg:p-22 sm:p-8 scrollbar-hidden">
@@ -69,15 +98,19 @@ export default function Pokemon({ filteredPokemonList, SelectPokemon }: {
                     <div
                         onClick={() => SelectPokemon(pokemon)}
                         key={pokemon.name}
-                        className="PokeCard p-16 bg-orange-200 rounded-2xl h-48 mb-44 flex flex-row items-center justify-between bg-center bg-no-repeat"
+                        className="PokeCard pl-12 bg-orange-200 rounded-2xl h-48 mb-44 flex flex-row items-center justify-between bg-center bg-no-repeat"
                         style={{ backgroundImage: `url('/Pokeball.svg')` }}
                     >
-                        <div className="flex flex-col">
-                            <p className="font-custom">#{pokemon.id}</p>
-                            <p className="font-custom">{pokemon.name}</p>
-                            <div>
+                        <div className="hidden bg-grass"  />
+                        <div className="flex gap-2 flex-col">
+                            <p className="text-4xl">#{pokemon.id}</p>
+                            <p className="text-6xl">{pokemon.name}</p>
+                            <div className="types-container flex gap-10">
                                 {pokemon.types.map((type: string) => (
-                                    <p key={type}>{type}</p>
+                                    <div className={`types-tags text-white text-2xl px-4 py-1 rounded flex items-center gap-4 bg-${type}`} key={type}>                                        {getTypeIcon(type)}
+                                        <p className="text-center mr-2">{type}</p>
+                                    </div>
+
                                 ))}
                             </div>
                         </div>
@@ -87,5 +120,6 @@ export default function Pokemon({ filteredPokemonList, SelectPokemon }: {
             </div>
         </main>
     );
+
 
 }
