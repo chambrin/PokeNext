@@ -1,3 +1,4 @@
+import React from "react";
 
 export const metadata = {
   title: 'Pokedex',
@@ -5,6 +6,10 @@ export const metadata = {
 }
 
 import localFont from 'next/font/local';
+const myFont = localFont({
+  src: '/fonts/Changa-Regular.ttf',
+  display: 'swap',
+});
 
 export default function RootLayout({
 
@@ -13,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={myFont.className}>
       <body>{children}</body>
     </html>
   )
