@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { fetchPokemonList, getPokemonByType } from '../../services/Pokemon_PokeAPI';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 
 export default function Pokemon({ filteredPokemonList, SelectPokemon }: {
@@ -95,10 +96,11 @@ export default function Pokemon({ filteredPokemonList, SelectPokemon }: {
         <main ref={mainRef} className="pokedexMain h-screen overflow-y-scroll lg:p-22 sm:p-8 scrollbar-hidden">
             <div>
                 {(filteredPokemonList.length > 0 ? filteredPokemonList : pokemonList).map((pokemon, index) => (
+
                     <div
                         onClick={() => SelectPokemon(pokemon)}
                         key={pokemon.name}
-                        className={`PokeCard pl-12 rounded-2xl h-48 mb-44 flex flex-row items-center justify-between bg-opacity-60 bg-center bg-no-repeat bg-${pokemon.types[0].toLowerCase()}`}
+                        className={`PokeCard cursor-pointer scale-100 hover:scale-105 transition pl-12 rounded-2xl h-48 mb-44 flex flex-row items-center justify-between bg-opacity-60 bg-center bg-no-repeat bg-${pokemon.types[0].toLowerCase()}`}
                         style={{ backgroundImage: `url('/Pokeball.svg')` }}
                     >
                         <div className="hidden bg-grass" />
@@ -125,6 +127,7 @@ export default function Pokemon({ filteredPokemonList, SelectPokemon }: {
                             alt={pokemon.name}
                         />
                     </div>
+
                 ))}
             </div>
         </main>

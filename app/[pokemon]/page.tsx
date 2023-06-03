@@ -5,6 +5,8 @@ import PokeEvolution from "@/app/components/PagePokemon/PokeEvolution";
 import PokeIllustration from "@/app/components/PagePokemon/PokeIllustration";
 import PokeStats from "@/app/components/PagePokemon/PokeStats";
 import PokeWeakness from "@/app/components/PagePokemon/PokeWeakness";
+import { motion } from 'framer-motion';
+
 
 import { useState, useEffect } from 'react';
 import axios from "axios";
@@ -35,6 +37,12 @@ export default  function PokemonPage() {
 
     // ----------------- affichage -----------------
     return (
+        <motion.div
+            className="page"
+            initial={{ y: '5vh', opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, ease: 'easeInOut' }}
+        >
         <div>
             <h1>Page du Pokémon : {pathnameWithoutSlash}</h1>
             <PokeIllustration infoPokemon={infoPokemon} />
@@ -42,5 +50,7 @@ export default  function PokemonPage() {
             <PokeStats infoPokemon={infoPokemon} />
             <PokeWeakness infoPokemon={infoPokemon} />
         </div>
+        </motion.div>
+
     );
 }
