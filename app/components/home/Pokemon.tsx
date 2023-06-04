@@ -62,7 +62,6 @@ export default function Pokemon({ filteredPokemonList, SelectPokemon }: {
 
 
     // Icons des types
-    // Icons des types
     const typesIcons = {
         bug: '/types-icons/bug.svg',
         dark: '/types-icons/dark.svg',

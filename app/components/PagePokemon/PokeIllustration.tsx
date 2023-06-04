@@ -1,17 +1,16 @@
 'use client';
 import { useState } from 'react';
+
 interface PokeIllustrationProps {
-    infoPokemon: any
+    infoPokemon: any;
 }
 
 export default function PokeIllustration({ infoPokemon }: PokeIllustrationProps) {
     const [isLoading, setIsLoading] = useState(true);
+    let illustrationPixel: HTMLImageElement | null = null;
+    let illustrationArtWork: HTMLImageElement | null = null;
 
-    // défininie la valeur des illustrations a null pour les afficher que si elle existe
-    let illustrationPixel = null;
-    let illustrationArtWork = null;
     if (infoPokemon !== null) {
-        //recuperation des image du pokemon
         illustrationPixel = new Image();
         illustrationPixel.src = infoPokemon.sprites.front_default;
         illustrationPixel.onload = () => setIsLoading(false);
@@ -28,8 +27,8 @@ export default function PokeIllustration({ infoPokemon }: PokeIllustrationProps)
                 <div>Chargement en cours...</div>
             ) : (
                 <>
-                    <img src={illustrationPixel.src} alt="Illustration pixel" />
-                    <img src={illustrationArtWork.src} alt="Illustration artwork" />
+                    <img src={illustrationPixel?.src} alt="Illustration pixel" />
+                    <img src={illustrationArtWork?.src} alt="Illustration artwork" />
                 </>
             )}
         </div>
