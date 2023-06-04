@@ -60,9 +60,11 @@ export default function Pokemon({ filteredPokemonList, SelectPokemon }: {
         };
     }, [fetchNextPokemon, mainRef]);
 
+    interface TypesIcons {
+        [key: string]: string;
+    }
 
-    // Icons des types
-    const typesIcons = {
+    const typesIcons: TypesIcons = {
         bug: '/types-icons/bug.svg',
         dark: '/types-icons/dark.svg',
         dragon: '/types-icons/dragon.svg',
@@ -86,7 +88,7 @@ export default function Pokemon({ filteredPokemonList, SelectPokemon }: {
     function getTypeIcon(type: string) {
         const icon = typesIcons[type.toLowerCase()];
         if (icon) {
-            return <img src={icon} alt={`${type} type icon`} width={24} height={24} />;
+            return <Image src={icon} alt={`${type} type icon`} width={24} height={24} />;
         }
         return null;
     }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 export default function Filter({ onSelectType, handleResetFilter }) {
         const [types, setTypes] = useState([]);
@@ -37,8 +38,7 @@ export default function Filter({ onSelectType, handleResetFilter }) {
         function getTypeIconFilter(type) {
                 const icon = typesIconsFilter[type.toLowerCase()];
                 if (icon) {
-                        return <img src={icon} alt={`${type} type icon`} width={24} height={24} />;
-                }
+                        return <Image src={icon} alt={`${type} type icon`} width={24} height={24} />;                }
                 return null;
         }
 
