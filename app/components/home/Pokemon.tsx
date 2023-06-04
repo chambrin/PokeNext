@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { fetchPokemonList, getPokemonByType } from '../../services/Pokemon_PokeAPI';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 
 export default function Pokemon({ filteredPokemonList, SelectPokemon }: {
@@ -61,7 +62,6 @@ export default function Pokemon({ filteredPokemonList, SelectPokemon }: {
 
 
     // Icons des types
-    // Icons des types
     const typesIcons = {
         bug: '/types-icons/bug.svg',
         dark: '/types-icons/dark.svg',
@@ -95,27 +95,38 @@ export default function Pokemon({ filteredPokemonList, SelectPokemon }: {
         <main ref={mainRef} className="pokedexMain h-screen overflow-y-scroll lg:p-22 sm:p-8 scrollbar-hidden">
             <div>
                 {(filteredPokemonList.length > 0 ? filteredPokemonList : pokemonList).map((pokemon, index) => (
+
                     <div
                         onClick={() => SelectPokemon(pokemon)}
                         key={pokemon.name}
-                        className="PokeCard pl-12 bg-orange-200 rounded-2xl h-48 mb-44 flex flex-row items-center justify-between bg-center bg-no-repeat"
+                        className={`PokeCard cursor-pointer scale-100 hover:scale-105 transition pl-12 rounded-2xl h-48 mb-44 flex flex-row items-center justify-between bg-opacity-60 bg-center bg-no-repeat bg-${pokemon.types[0].toLowerCase()}`}
                         style={{ backgroundImage: `url('/Pokeball.svg')` }}
                     >
-                        <div className="hidden bg-grass"  />
+                        <div className="hidden bg-grass" />
                         <div className="flex gap-2 flex-col">
                             <p className="text-4xl">#{pokemon.id}</p>
                             <p className="text-6xl">{pokemon.name}</p>
                             <div className="types-container flex gap-10">
                                 {pokemon.types.map((type: string) => (
-                                    <div className={`types-tags text-white text-2xl px-4 py-1 rounded flex items-center gap-4 bg-${type}`} key={type}>                                        {getTypeIcon(type)}
+                                    <div
+                                        className={`types-tags text-white text-2xl px-4 py-1 rounded flex items-center gap-4 bg-${type.toLowerCase()}`}
+                                        key={type}
+                                    >
+                                        {getTypeIcon(type)}
                                         <p className="text-center mr-2">{type}</p>
                                     </div>
-
                                 ))}
                             </div>
                         </div>
-                        <Image width={500} height={500} className="overflow-visible right-0 -mr-20 w-3/6" src={pokemon.image} alt={pokemon.name} />
+                        <Image
+                            width={500}
+                            height={500}
+                            className="overflow-visible right-0 -mr-20 w-3/6"
+                            src={pokemon.image}
+                            alt={pokemon.name}
+                        />
                     </div>
+
                 ))}
             </div>
         </main>
